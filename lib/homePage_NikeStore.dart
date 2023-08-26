@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously, unused_element
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 import 'Data/constants.dart';
+import 'Data/text_content.dart';
 import 'about_Shoe/about_page.dart';
 import 'authentication/login.dart';
 
@@ -20,8 +22,8 @@ class _NikeHomePageState extends State<NikeHomePage>
   @override
   //----------------------init State-----------------------//
   void initState() {
-    shoeController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    shoeController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
     shoeController.forward();
     super.initState();
   }
@@ -33,13 +35,13 @@ class _NikeHomePageState extends State<NikeHomePage>
       child: Scaffold(
         //-------------------Background Color----------------//
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-          constraints: BoxConstraints.expand(),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+          constraints: const BoxConstraints.expand(),
           decoration: BoxDecoration(color: Colors.grey.shade100),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 //---------------------Top Button------------------//
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,22 +52,22 @@ class _NikeHomePageState extends State<NikeHomePage>
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
-                            color: const Color.fromARGB(66, 0, 0, 0),
+                            color: Color.fromARGB(66, 0, 0, 0),
                             blurRadius: 12,
                           ),
                         ],
                       ),
-                      child: Icon(Icons.dehaze),
+                      child: const Icon(Icons.dehaze),
                     ),
                     InkWell(
-                      onTap: () async{
-                        
-                       
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                          return LoginPage();
-                        },));
+                      onTap: () async {
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ));
                       },
                       child: Container(
                         height: 50,
@@ -73,7 +75,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Color.fromARGB(17, 0, 0, 0),
                               blurRadius: 12,
@@ -84,7 +86,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 //---------------------Search Menu---------------//
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -98,10 +100,10 @@ class _NikeHomePageState extends State<NikeHomePage>
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Search your shoe..',
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                               color: Colors.grey,
                             ),
-                            prefixIcon: Icon(Icons.search),
+                            prefixIcon: const Icon(Icons.search),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -112,13 +114,13 @@ class _NikeHomePageState extends State<NikeHomePage>
                     Container(
                       height: 48,
                       width: 48,
-                      margin: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(left: 10),
+                      decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 246, 212, 101),
                           borderRadius: BorderRadius.horizontal(
                               left: Radius.elliptical(8, 12),
                               right: Radius.elliptical(8, 12))),
-                      child: Icon(
+                      child: const Icon(
                         Icons.sort,
                         size: 40,
                         color: Colors.black,
@@ -126,7 +128,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                     )
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 //------------------Pamplate--------------------//
                 SizedBox(
                   height: 150,
@@ -139,61 +141,57 @@ class _NikeHomePageState extends State<NikeHomePage>
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 //--------------Slider to brand-----------------//
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.arrow_left,
                       color: Colors.grey,
                       size: 38,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Container(
                       height: 35,
                       width: 35,
                       decoration:
                           BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      child: Image.network(
-                          'https://cdn.icon-icons.com/icons2/3914/PNG/512/puma_logo_icon_248754.png'),
+                      child: Image.network(ImageConstants.pumaIc),
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Container(
                       height: 65,
                       width: 65,
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         color: Colors.amber.shade300,
-                        border: Border.symmetric(
+                        border: const Border.symmetric(
                             horizontal: BorderSide(width: 0.4),
                             vertical: BorderSide(width: 1)),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Image.network(
-                        'https://img.freepik.com/free-icon/nike_318-565950.jpg',
-                      ),
+                      child: Image.network(ImageConstants.nikeIc),
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Container(
                       height: 35,
                       width: 35,
                       decoration:
                           BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      child: Image.network(
-                          'https://cdn-icons-png.flaticon.com/512/731/731962.png'),
+                      child: Image.network(ImageConstants.adiIc),
                     ),
-                    SizedBox(width: 10),
-                    Icon(
+                    const SizedBox(width: 10),
+                    const Icon(
                       Icons.arrow_right,
                       color: Colors.grey,
                       size: 38,
                     ),
                   ],
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 //---------------New shoe-----------------------//
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -224,7 +222,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                     )
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 //--------------New Shoe ListView--------------------//
                 SizedBox(
                   height: 230,
@@ -253,13 +251,13 @@ class _NikeHomePageState extends State<NikeHomePage>
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 15),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 'Nike',
                                                 style: TextStyle(
                                                   fontFamily: 'Poppins',
@@ -269,21 +267,20 @@ class _NikeHomePageState extends State<NikeHomePage>
                                               ),
                                               Text(
                                                 newShoe[index].name!,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 22,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.amber),
                                               ),
-                                              SizedBox(height: 20),
+                                              const SizedBox(height: 20),
                                               ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        Color(0xfff6d365)),
-                                                onPressed: () {
-                                              
-                                                },
-                                                child: Row(
+                                                        const Color(
+                                                            0xfff6d365)),
+                                                onPressed: () {},
+                                                child: const Row(
                                                   children: [
                                                     Text(
                                                       'Add to bag',
@@ -309,7 +306,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                         Container(
                                           alignment: Alignment.centerRight,
                                           child: Image.asset(
-                                            'assets/Images/more_images/base_icon.png',
+                                            ImageConstants.baseIc,
                                             height: 70,
                                           ),
                                         ),
@@ -344,16 +341,16 @@ class _NikeHomePageState extends State<NikeHomePage>
                               ],
                             ),
                           ),
-                          SizedBox(width: 30),
+                          const SizedBox(width: 30),
                         ],
                       );
                     },
                     //------------------ListView----------------------//
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 //------------------Popular Shoe-------------------//
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -409,14 +406,14 @@ class _NikeHomePageState extends State<NikeHomePage>
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 15),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
                                               //------Shoe Name-------//
-                                              Text(
+                                              const Text(
                                                 'Nike',
                                                 style: TextStyle(
                                                   fontFamily: 'Poppins',
@@ -426,22 +423,21 @@ class _NikeHomePageState extends State<NikeHomePage>
                                               ),
                                               Text(
                                                 popularShoe[index].name!,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 22,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.amber),
                                               ),
-                                              SizedBox(height: 20),
+                                              const SizedBox(height: 20),
                                               //---Popular shoe btn---//
                                               ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        Color(0xfff6d365)),
-                                                onPressed: () {
-                                                  print('object2');
-                                                },
-                                                child: Row(
+                                                        const Color(
+                                                            0xfff6d365)),
+                                                onPressed: () {},
+                                                child: const Row(
                                                   children: [
                                                     Text(
                                                       'Add to bag',
@@ -468,7 +464,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                         Container(
                                           alignment: Alignment.centerRight,
                                           child: Image.asset(
-                                            'assets/Images/more_images/base_icon.png',
+                                            ImageConstants.baseIc,
                                             height: 70,
                                           ),
                                         ),
@@ -506,7 +502,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                               ],
                             ),
                           ),
-                          SizedBox(width: 30),
+                          const SizedBox(width: 30),
                         ],
                       );
                     },

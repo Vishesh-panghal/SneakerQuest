@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_typing_uninitialized_variables, avoid_print, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable, file_names
 
 import 'dart:async';
 
@@ -44,7 +44,6 @@ class _SignupPageState extends State<SignupPage> {
     if (check) {
       var userList = await myDB.fetchUsr();
       setState(() {});
-      print("fetchUser:- $check");
     }
   }
 
@@ -52,8 +51,8 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
+        constraints:const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
           colors: [
             Color.fromARGB(255, 246, 212, 101),
@@ -67,8 +66,8 @@ class _SignupPageState extends State<SignupPage> {
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(height: 30),
-                Text(
+              const  SizedBox(height: 30),
+              const  Text(
                   'SneakerQuest',
                   style: TextStyle(
                     fontFamily: 'Poppins',
@@ -76,13 +75,13 @@ class _SignupPageState extends State<SignupPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 50),
+              const  SizedBox(height: 50),
                 //------------TextForm Field-------------------------//
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
+                      boxShadow:const [
                         BoxShadow(
                           blurRadius: 12,
                           offset: Offset(-1, 0),
@@ -96,7 +95,7 @@ class _SignupPageState extends State<SignupPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         //--------------Signup Text-------------------//
-                        Text(
+                      const  Text(
                           'Signup',
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -104,8 +103,8 @@ class _SignupPageState extends State<SignupPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Divider(),
-                        SizedBox(height: 20),
+                      const  Divider(),
+                      const  SizedBox(height: 20),
                         //-----------Input Field--------------------//
                         TextFormField(
                           controller: emailController,
@@ -115,7 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                             }
                             return null;
                           },
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(
                               Icons.email,
                             ),
@@ -127,7 +126,7 @@ class _SignupPageState extends State<SignupPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        SizedBox(height: 15),
+                      const  SizedBox(height: 15),
                         TextFormField(
                           controller: phoneController,
                           validator: (value) {
@@ -136,7 +135,7 @@ class _SignupPageState extends State<SignupPage> {
                             }
                             return null;
                           },
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(
                               Icons.phone,
                             ),
@@ -148,7 +147,7 @@ class _SignupPageState extends State<SignupPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        SizedBox(height: 15),
+                      const  SizedBox(height: 15),
                         TextFormField(
                           controller: passwordController,
                           validator: (value) {
@@ -159,7 +158,7 @@ class _SignupPageState extends State<SignupPage> {
                           },
                           obscureText: true,
                           obscuringCharacter: '*',
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(
                               Icons.password,
                             ),
@@ -171,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        SizedBox(height: 15),
+                      const  SizedBox(height: 15),
                         TextFormField(
                           controller: confirmPasswordController,
                           validator: (value) {
@@ -182,7 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                           },
                           obscureText: true,
                           obscuringCharacter: '*',
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                             prefixIcon: Icon(
                               Icons.password_outlined,
                             ),
@@ -194,8 +193,8 @@ class _SignupPageState extends State<SignupPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Divider(),
+                       const SizedBox(height: 20),
+                      const  Divider(),
                         //------------------Register Btn---------------//
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -208,7 +207,6 @@ class _SignupPageState extends State<SignupPage> {
                             if (_formKey.currentState!.validate()) {
                               if (await myDB
                                   .findUser(emailController.text.toString())) {
-                                print('Registered!');
                                 var email = emailController.text.toString();
                                 var phone = phoneController.text.toString();
                                 var password =
@@ -224,7 +222,7 @@ class _SignupPageState extends State<SignupPage> {
                                 phoneController.clear();
                                 passwordController.clear();
                                 confirmPasswordController.clear();
-                                Timer(Duration(seconds: 1), () {
+                                Timer(const Duration(seconds: 1), () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -240,7 +238,7 @@ class _SignupPageState extends State<SignupPage> {
                               }
                             }
                           },
-                          child: Text(
+                          child:const Text(
                             'Register',
                             style: TextStyle(
                               fontFamily: 'Poppins',
@@ -254,7 +252,7 @@ class _SignupPageState extends State<SignupPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Already have an account?'),
+                           const Text('Already have an account?'),
                             TextButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -263,15 +261,15 @@ class _SignupPageState extends State<SignupPage> {
                                         builder: (context) => LoginPage(),
                                       ));
                                 },
-                                child: Text('Login'))
+                                child:const Text('Login'))
                           ],
                         )
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
-                Text(
+               const SizedBox(height: 30),
+               const Text(
                   '   Made with ❤️\nVishesh Panghal',
                   style: TextStyle(
                     fontFamily: 'Poppins',
