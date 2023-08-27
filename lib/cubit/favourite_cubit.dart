@@ -1,18 +1,24 @@
+import 'package:SneakerQuest/cubit/fav_state.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../Data/constants.dart';
 
-part 'state_favourite_cubit.dart';
+class FavouriteCubitCubit extends Cubit<FavDB> {
+  // initial state:-
+ FavouriteCubitCubit():super(FavDB( fav: []));
 
-class FavouriteCubitCubit extends Cubit<List<ShoeItem>> {
-  FavouriteCubitCubit() : super(FavouriteCubitInitial() as List<ShoeItem>);
+ //Add:-
 
-  void addToFav(ShoeItem shoe) {
-    emit(state..add(shoe));
-  }
-
-  void removeToFav(ShoeItem shoe) {
-    emit(state..remove(shoe));
-  }
+ void addToFav({required ShoeItem shoe})
+ {
+  List<ShoeItem> currList = state.fav;
+  currList.add(shoe);
+  emit(FavDB(fav: currList));
+ }
+ void removeFromFav({required ShoeItem shoe})
+ {
+  List<ShoeItem> currList = state.fav;
+  currList.remove(shoe);
+  emit(FavDB(fav: currList));
+ }
 }

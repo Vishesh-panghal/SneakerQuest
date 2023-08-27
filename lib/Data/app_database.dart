@@ -75,7 +75,7 @@ class AppDatabase {
     var count = await db.rawQuery(
         "SELECT * FROM $USER_TABLE WHERE $USER_COLUMN_EMAIL = ?", [email]);
     print("Count find user:-${count.isEmpty}");
-    return count.isEmpty;
+    return count.isNotEmpty;
   }
 
   Future<bool> loginUsr(String email, String pass) async {
@@ -83,7 +83,7 @@ class AppDatabase {
     var count = await db.rawQuery(
         "SELECT * FROM $USER_TABLE WHERE $USER_COLUMN_EMAIL = ? AND $USER_COLUMN_PASSWORD = ?",
         [email, pass]);
-    return count.isNotEmpty;
+    return count.isEmpty;
   }
 
   Future<void> deleteTable() async {

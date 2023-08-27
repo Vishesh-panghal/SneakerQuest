@@ -1,8 +1,10 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:SneakerQuest/cubit/favourite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:SneakerQuest/Data/text_content.dart';
 import 'package:SneakerQuest/screens/bag.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Data/constants.dart';
 
@@ -25,7 +27,6 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
     )..forward();
     super.initState();
   }
-
   List shoeSize = ['36', '37', '38', '39', '40', '41', '42'];
   String isSelectedSize = '';
   bool isFav = false;
@@ -293,6 +294,36 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                   backgroundColor: Colors.green,
                                   duration: Duration(milliseconds: 300),
                                 ));
+                                context.read<FavouriteCubitCubit>().addToFav(
+                                      shoe: ShoeItem(
+                                        name: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .name!
+                                            : NikenewShoe[widget.index].name!,
+                                        imgAdd: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .imgAdd!
+                                            : NikenewShoe[widget.index].imgAdd!,
+                                        aboutShoe: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .aboutShoe!
+                                            : NikenewShoe[widget.index]
+                                                .aboutShoe!,
+                                        colorSelection: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .colorSelection!
+                                            : NikenewShoe[widget.index]
+                                                .colorSelection!,
+                                        style: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .style!
+                                            : NikenewShoe[widget.index].style!,
+                                            price: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .price!
+                                            : NikenewShoe[widget.index].price!,
+                                      ),
+                                    );
                               } else {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
@@ -307,6 +338,38 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                   backgroundColor: Colors.red,
                                   duration: Duration(milliseconds: 300),
                                 ));
+                                context
+                                    .read<FavouriteCubitCubit>()
+                                    .removeFromFav(
+                                      shoe: ShoeItem(
+                                        name: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .name!
+                                            : NikenewShoe[widget.index].name!,
+                                        imgAdd: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .imgAdd!
+                                            : NikenewShoe[widget.index].imgAdd!,
+                                        aboutShoe: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .aboutShoe!
+                                            : NikenewShoe[widget.index]
+                                                .aboutShoe!,
+                                        colorSelection: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .colorSelection!
+                                            : NikenewShoe[widget.index]
+                                                .colorSelection!,
+                                        style: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .style!
+                                            : NikenewShoe[widget.index].style!,
+                                            price: widget.isPopular
+                                            ? NikepopularShoe[widget.index]
+                                                .price!
+                                            : NikenewShoe[widget.index].price!,
+                                      ),
+                                    );
                               }
                               setState(() {});
                             },
