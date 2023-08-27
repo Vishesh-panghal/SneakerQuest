@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:nike_store/Data/text_content.dart';
-import 'package:nike_store/about_Shoe/bag.dart';
+import 'package:SneakerQuest/Data/text_content.dart';
+import 'package:SneakerQuest/screens/bag.dart';
 
 import '../Data/constants.dart';
 
@@ -28,6 +28,7 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
 
   List shoeSize = ['36', '37', '38', '39', '40', '41', '42'];
   String isSelectedSize = '';
+  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,43 +39,7 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
         decoration: BoxDecoration(color: Colors.grey.shade100),
         child: Column(
           children: [
-            const SizedBox(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.zero,
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromARGB(66, 0, 0, 0),
-                        blurRadius: 12,
-                      ),
-                    ],
-                  ),
-                  child: const Icon(Icons.dehaze),
-                ),
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromARGB(17, 0, 0, 0),
-                        blurRadius: 12,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 90),
             //---------------- Menu & Profile-----------------------//
             Column(
               children: [
@@ -82,8 +47,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                   children: [
                     Text(
                       widget.isPopular
-                          ? popularShoe[widget.index].name!
-                          : newShoe[widget.index].name!,
+                          ? NikepopularShoe[widget.index].name!
+                          : NikenewShoe[widget.index].name!,
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 28,
@@ -140,9 +105,9 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                     );
                   },
                   child: widget.isPopular
-                      ? Image.asset(popularShoe[widget.index].imgAdd!)
+                      ? Image.asset(NikepopularShoe[widget.index].imgAdd!)
                       : Image.asset(
-                          newShoe[widget.index].aboutShoe!,
+                          NikenewShoe[widget.index].imgAdd!,
                         ),
                 )
               ],
@@ -214,8 +179,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                       //---------------------Shoe size------------------//
                       Text(
                         widget.isPopular
-                            ? popularShoe[widget.index].aboutShoe!
-                            : newShoe[widget.index].aboutShoe!,
+                            ? NikepopularShoe[widget.index].aboutShoe!
+                            : NikenewShoe[widget.index].aboutShoe!,
                         style: const TextStyle(fontFamily: 'Poppins'),
                       ),
                       //------------------About shoe-----------------//
@@ -230,8 +195,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                           ),
                           Text(
                             widget.isPopular
-                                ? popularShoe[widget.index].colorSelection!
-                                : newShoe[widget.index].colorSelection!,
+                                ? NikepopularShoe[widget.index].colorSelection!
+                                : NikenewShoe[widget.index].colorSelection!,
                             style: const TextStyle(fontFamily: 'Poppins'),
                           ),
                         ],
@@ -247,8 +212,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                           ),
                           Text(
                             widget.isPopular
-                                ? popularShoe[widget.index].style!
-                                : newShoe[widget.index].style!,
+                                ? NikepopularShoe[widget.index].style!
+                                : NikenewShoe[widget.index].style!,
                             style: const TextStyle(fontFamily: 'Poppins'),
                           ),
                         ],
@@ -310,13 +275,40 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white),
+                                backgroundColor:
+                                    isFav ? Colors.redAccent : Colors.white),
                             onPressed: () {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Added to Favourite '),
-                                backgroundColor: Colors.green,
-                              ));
+                              isFav = !isFav;
+                              if (isFav) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                    'Added to Favourite',
+                                    style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                  backgroundColor: Colors.green,
+                                  duration: Duration(milliseconds: 300),
+                                ));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                    'Removed from Favourite ',
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  duration: Duration(milliseconds: 300),
+                                ));
+                              }
+                              setState(() {});
                             },
                             child: const Text(
                               'Favourite',

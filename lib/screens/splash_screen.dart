@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import 'authentication/login.dart';
-import 'homePage_NikeStore.dart';
+import 'homePage.dart';
 
 class SplashScreenPage extends StatefulWidget {
     static const String KEYLOGIN = 'login';

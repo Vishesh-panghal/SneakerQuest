@@ -1,13 +1,19 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
-
-import 'authentication/login.dart';
-import 'homePage_NikeStore.dart';
-import 'splash_screen.dart';
+import 'package:SneakerQuest/cubit/favourite_cubit.dart';
+import 'package:SneakerQuest/screens/about_page.dart';
+import 'package:SneakerQuest/screens/bag.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'screens/authentication/login.dart';
+import 'screens/homePage.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => FavouriteCubitCubit(),
+    child:const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: NikeHomePage(),
     );

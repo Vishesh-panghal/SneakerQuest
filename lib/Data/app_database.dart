@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:nike_store/Data/app_model.dart';
+import 'package:SneakerQuest/Data/app_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -49,17 +49,17 @@ class AppDatabase {
     );
   }
 
-  Future<List<UsrModel>> fetchUsr() async {
+  Future<List<UsrLoginModel>> fetchUsr() async {
     var db = await getDB();
     List<Map<String, dynamic>> user = await db.query(USER_TABLE);
-    List<UsrModel> usrList = [];
+    List<UsrLoginModel> usrList = [];
     for (Map<String, dynamic> usr in user) {
-      usrList.add(UsrModel.fromMap(usr));
+      usrList.add(UsrLoginModel.fromMap(usr));
     }
     return usrList;
   }
 
-  Future<bool> addusr(UsrModel usr) async {
+  Future<bool> addusr(UsrLoginModel usr) async {
     var db = await getDB();
     var rowsEffected = await db.insert(USER_TABLE, usr.toMap());
     if (rowsEffected > 0) {

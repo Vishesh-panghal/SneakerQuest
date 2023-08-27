@@ -3,8 +3,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nike_store/Data/app_database.dart';
-import 'package:nike_store/Data/app_model.dart';
+import 'package:SneakerQuest/Data/app_database.dart';
+import 'package:SneakerQuest/Data/app_model.dart';
 
 import 'login.dart';
 
@@ -39,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
     // arrUsr = await myDB.fetchUsr();
   }
 
-  void addusr(UsrModel usr) async {
+  void addusr(UsrLoginModel usr) async {
     bool check = await myDB.addusr(usr);
     if (check) {
       var userList = await myDB.fetchUsr();
@@ -213,7 +213,7 @@ class _SignupPageState extends State<SignupPage> {
                                     passwordController.text.toString();
 
                                 addusr(
-                                  UsrModel(
+                                  UsrLoginModel(
                                       email: email,
                                       phone: phone,
                                       password: password),

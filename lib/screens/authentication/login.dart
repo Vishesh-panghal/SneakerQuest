@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, use_build_context_synchronously,use_key_in_widget_constructors, must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:nike_store/Data/app_database.dart';
-import 'package:nike_store/authentication/signUp.dart';
-import '../homePage_NikeStore.dart';
+import 'package:SneakerQuest/Data/app_database.dart';
+import 'package:SneakerQuest/screens/authentication/signUp.dart';
+import '../homePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override

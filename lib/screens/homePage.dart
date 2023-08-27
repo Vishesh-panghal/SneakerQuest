@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'Data/constants.dart';
-import 'Data/text_content.dart';
-import 'about_Shoe/about_page.dart';
+import '../Data/constants.dart';
+import '../Data/text_content.dart';
+import 'about_page.dart';
 import 'authentication/login.dart';
 
 class NikeHomePage extends StatefulWidget {
@@ -228,8 +228,8 @@ class _NikeHomePageState extends State<NikeHomePage>
                   height: 230,
                   width: 380,
                   child: ListView.builder(
-                    // itemCount: Constants.newShoes.length,
-                    itemCount: newShoe.length,
+                    // itemCount: Constants.NikenewShoes.length,
+                    itemCount: NikenewShoe.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       //--------Main Row Text and Image-----------//
@@ -266,7 +266,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                                 ),
                                               ),
                                               Text(
-                                                newShoe[index].name!,
+                                                NikenewShoe[index].name!,
                                                 style: const TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 22,
@@ -330,7 +330,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                           );
                                         },
                                         child: Image.asset(
-                                          newShoe[index].imgAdd!,
+                                          NikenewShoe[index].imgAdd!,
                                           height: 90,
                                         ),
                                       ),
@@ -386,7 +386,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                   height: 230,
                   width: 380,
                   child: ListView.builder(
-                    itemCount: popularShoe.length,
+                    itemCount: NikepopularShoe.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Row(
@@ -422,7 +422,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                                 ),
                                               ),
                                               Text(
-                                                popularShoe[index].name!,
+                                                NikepopularShoe[index].name!,
                                                 style: const TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 22,
@@ -492,7 +492,7 @@ class _NikeHomePageState extends State<NikeHomePage>
                                           );
                                         },
                                         child: Image.asset(
-                                          popularShoe[index].imgAdd!,
+                                          NikepopularShoe[index].imgAdd!,
                                           height: 90,
                                         ),
                                       ),

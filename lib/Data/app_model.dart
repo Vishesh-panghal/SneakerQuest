@@ -1,15 +1,15 @@
 import 'app_database.dart';
 
-class UsrModel
+class UsrLoginModel
 {
   String? email;
   String? phone;
   String? password;
-  UsrModel({this.email,this.phone,this.password});
+  UsrLoginModel({this.email,this.phone,this.password});
 
-  factory UsrModel.fromMap(Map<String,dynamic> map)
+  factory UsrLoginModel.fromMap(Map<String,dynamic> map)
   {
-    return UsrModel(
+    return UsrLoginModel(
       email: map[AppDatabase.USER_COLUMN_EMAIL],
       phone:  map[AppDatabase.USER_COLUMN_PHONE],
       password: map[AppDatabase.USER_COLUMN_PASSWORD],

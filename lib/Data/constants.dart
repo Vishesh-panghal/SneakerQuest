@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class ShoeItem {
   late String? name;
   late String? imgAdd;
@@ -92,20 +94,15 @@ ShoeItem sh10 = ShoeItem(
   imgAdd: 'assets/Images/nike_store/popular/list5.png',
   aboutShoe:
       "Designed for No. 77 and made for every athlete craving speed and efficiency, Luka's debut delivers the goods. The first shoe with full-length Formula 23 foam, it has an ultra-supportive fit crafted with the step-back in mind. Meanwhile, strong and lightweight Flight Wire embroidery keeps you feeling contained, whether you're playing indoors or out. This is the assist you've been waiting for—get out there and make your shot. This version is designed wider and made for play on outdoor courts.",
-      colorSelection: "White/Dynamic Turquoise\n/Laser Orange/Fire Pink",
+  colorSelection: "White/Dynamic Turquoise\n/Laser Orange/Fire Pink",
   style: 'DQ6510-164',
   isPopular: true,
 );
 
+List<ShoeItem> shoes = [sh1, sh2, sh3, sh4, sh5, sh6, sh7, sh8, sh9, sh10];
 
-List<ShoeItem> shoes = [
-  sh1,sh2,sh3,sh4,sh5,sh6,sh7,sh8,sh9,sh10,
-]; 
+List<ShoeItem> NikepopularShoe = [sh6, sh7, sh8, sh9, sh10];
 
-List<ShoeItem> popularShoe = [
-  sh6,sh7,sh8,sh9,sh10,
-];
+List<ShoeItem> NikenewShoe = [sh1, sh2, sh3, sh4, sh5];
 
-List<ShoeItem> newShoe = [
-sh1,sh2,sh3,sh4,sh5,
-];
+List<Map<String,dynamic>> favourite = [{}];
