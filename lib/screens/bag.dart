@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_final_fields
 
-import 'package:SneakerQuest/Data/constants.dart';
 import 'package:SneakerQuest/cubit/fav_state.dart';
 import 'package:SneakerQuest/cubit/favourite_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:SneakerQuest/Data/text_content.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class ShoeBagPage extends StatefulWidget {
   const ShoeBagPage({super.key});
@@ -14,10 +13,20 @@ class ShoeBagPage extends StatefulWidget {
   State<ShoeBagPage> createState() => _ShoeBagPageState();
 }
 
-class _ShoeBagPageState extends State<ShoeBagPage> {
-  var _subTotal = 0.0;
+class _ShoeBagPageState extends State<ShoeBagPage>
+    with SingleTickerProviderStateMixin {
+  bool isShipped = false;
+  double _subTotal = 0.0;
   var _tax = 0.0;
   var _total = 0.0;
+
+  late AnimationController buyBtnController;
+  @override
+  void initState() {
+    buyBtnController = AnimationController(vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,87 +74,72 @@ class _ShoeBagPageState extends State<ShoeBagPage> {
                   SizedBox(height: 50),
                   Container(
                     height: 400,
-                    decoration: BoxDecoration(color: Colors.amber.shade400),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.shade400,
+                    ),
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: BlocBuilder<FavouriteCubitCubit, FavDB>(
                       builder: (context, state) {
+                        for(var item in state.fav){
+                          _subTotal += double.parse(item.price!);
+                        }
                         return ListView.builder(
                           itemCount: state.fav.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              leading: Stack(
-                                children: [
-                                  Image.asset(
-                                    ImageConstants.baseIc,
-                                    width: 100,
-                                    color: Colors.yellow,
-                                  ),
-                                  Image.asset(
-                                    '${state.fav[index].imgAdd}',
-                                    height: 80,
-                                  ),
-                                ],
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${state.fav[index].name}',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      '${state.fav[index].imgAdd}',
+                                      height: 70,
+                                      width: 180,
                                     ),
-                                  ),
-                                  Text(
-                                    '${state.fav[index].style}',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '${state.fav[index].price}',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.black
+                                    SizedBox(width: 75),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${state.fav[index].name}',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(width: 50),
-                                      InkWell(
-                                        onTap: () {
-                                          context
-                                              .read<FavouriteCubitCubit>()
-                                              .removeFromFav(
-                                                shoe: ShoeItem(
-                                                  name: state.fav[index].name,
-                                                  imgAdd:
-                                                      state.fav[index].imgAdd,
-                                                  aboutShoe: state
-                                                      .fav[index].aboutShoe,
-                                                  colorSelection: state
-                                                      .fav[index]
-                                                      .colorSelection,
-                                                  style: state.fav[index].style,
-                                                  price: state.fav[index].price
-                                                ),
-                                              );
-                                        },
-                                        child: Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
+                                        Text(
+                                          '${state.fav[index].style}',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '  \u{20B9}${state.fav[index].price}',
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(width: 20),
+                                            Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Divider(thickness: 2),
+                              ],
                             );
                           },
                         );
@@ -264,17 +258,32 @@ class _ShoeBagPageState extends State<ShoeBagPage> {
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
             ),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'Continue',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
+            child: isShipped
+                ? LottieBuilder.asset(
+                    'assets/lottie/ic_shipp.json',
+                    onLoaded: (p0) {
+                      print('Lottie');
+                      buyBtnController.duration = p0.duration;
+                      buyBtnController.forward();
+                      isShipped = !isShipped;
+                      setState(() {});
+                    },height: 60,
+                  )
+                : TextButton(
+                    onPressed: () {
+                      isShipped = !isShipped;
+                      print(isShipped);
+                      setState(() {});
+                    },
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ),
           ),
         ],
       ),

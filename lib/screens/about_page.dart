@@ -27,6 +27,7 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
     )..forward();
     super.initState();
   }
+
   List shoeSize = ['36', '37', '38', '39', '40', '41', '42'];
   String isSelectedSize = '';
   bool isFav = false;
@@ -318,12 +319,13 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                             ? NikepopularShoe[widget.index]
                                                 .style!
                                             : NikenewShoe[widget.index].style!,
-                                            price: widget.isPopular
+                                        price: widget.isPopular
                                             ? NikepopularShoe[widget.index]
                                                 .price!
                                             : NikenewShoe[widget.index].price!,
                                       ),
                                     );
+                                setState(() {});
                               } else {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
@@ -364,7 +366,7 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                             ? NikepopularShoe[widget.index]
                                                 .style!
                                             : NikenewShoe[widget.index].style!,
-                                            price: widget.isPopular
+                                        price: widget.isPopular
                                             ? NikepopularShoe[widget.index]
                                                 .price!
                                             : NikenewShoe[widget.index].price!,

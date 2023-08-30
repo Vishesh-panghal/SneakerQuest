@@ -8,7 +8,7 @@ import 'authentication/login.dart';
 import 'homePage.dart';
 
 class SplashScreenPage extends StatefulWidget {
-    static const String KEYLOGIN = 'login';
+  static const String KEYLOGIN = 'login';
   const SplashScreenPage({super.key});
 
   @override
@@ -46,7 +46,6 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       setState(() {});
     });
     super.initState();
-
   }
 
   @override
@@ -167,18 +166,17 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                 child: InkWell(
                   onTap: () async {
                     if (!isLoggedIn) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) {
-                        return  LoginPage();
-                      },
-                    ));
-                   
-                    }else{
                       Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const NikeHomePage();
-                      },
-                    ));
+                        builder: (context) {
+                          return LoginPage();
+                        },
+                      ));
+                    } else {
+                      Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const NikeHomePage();
+                        },
+                      ));
                     }
                   },
                   child: Row(

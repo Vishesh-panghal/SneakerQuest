@@ -1,11 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-
-import '../Data/constants.dart';
 import '../Data/text_content.dart';
-import 'about_page.dart';
-import 'authentication/login.dart';
+import 'homepage_screens/nike_shoe_page.dart';
 
 class NikeHomePage extends StatefulWidget {
   const NikeHomePage({super.key});
@@ -30,63 +27,66 @@ class _NikeHomePageState extends State<NikeHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        //-------------------Background Color----------------//
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-          constraints: const BoxConstraints.expand(),
-          decoration: BoxDecoration(color: Colors.grey.shade100),
-          child: SingleChildScrollView(
+    return Scaffold(
+      //-------------------Background Color----------------//
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+        constraints: const BoxConstraints.expand(),
+        decoration: BoxDecoration(color: Colors.grey.shade100),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            bottom: false,
             child: Column(
               children: [
-                const SizedBox(height: 50),
+                // const SizedBox(height: 50),
                 //---------------------Top Button------------------//
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(66, 0, 0, 0),
-                            blurRadius: 12,
-                          ),
-                        ],
+                    const Text(
+                      'Welcome',
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black
                       ),
-                      child: const Icon(Icons.dehaze),
                     ),
+                    const SizedBox(width: 10),
+                    Text(
+                      'User',
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber.shade400,
+                      ),
+                    ),
+                    const SizedBox(width: 130),
                     InkWell(
-                      onTap: () async {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
                           builder: (context) {
-                            return LoginPage();
+                            return Container();
                           },
-                        ));
+                        );
                       },
                       child: Container(
+                        margin: const EdgeInsets.only(right: 5.0),
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(17, 0, 0, 0),
-                              blurRadius: 12,
-                            ),
-                          ],
                         ),
+                        child: const Icon(Icons.dehaze),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const Divider(thickness: 1),
+                const SizedBox(height: 25),
                 //---------------------Search Menu---------------//
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -128,7 +128,10 @@ class _NikeHomePageState extends State<NikeHomePage>
                     )
                   ],
                 ),
-                const SizedBox(height: 30),
+
+                const SizedBox(height: 25),
+                const Divider(thickness: 1),
+                const SizedBox(height: 5),
                 //------------------Pamplate--------------------//
                 SizedBox(
                   height: 150,
@@ -189,325 +192,10 @@ class _NikeHomePageState extends State<NikeHomePage>
                     ),
                   ],
                 ),
-                const SizedBox(height: 50),
-                //---------------New shoe-----------------------//
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Newest nike shoes',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'See more',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                              color: Colors.amber),
-                        ),
-                        Icon(
-                          Icons.arrow_right,
-                          size: 28,
-                          color: Colors.amber,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
                 //--------------New Shoe ListView--------------------//
-                SizedBox(
-                  height: 230,
-                  width: 380,
-                  child: ListView.builder(
-                    // itemCount: Constants.NikenewShoes.length,
-                    itemCount: NikenewShoe.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      //--------Main Row Text and Image-----------//
-                      return Row(
-                        children: [
-                          Container(
-                            height: 200,
-                            width: 380,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(12)),
-                            //---------Text Column----------------//
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Stack(
-                                  alignment: Alignment.centerRight,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              const Text(
-                                                'Nike',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                NikenewShoe[index].name!,
-                                                style: const TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.amber),
-                                              ),
-                                              const SizedBox(height: 20),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color(
-                                                            0xfff6d365)),
-                                                onPressed: () {},
-                                                child: const Row(
-                                                  children: [
-                                                    Text(
-                                                      'Add to bag',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .shopping_bag_outlined,
-                                                      size: 18,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.centerRight,
-                                          child: Image.asset(
-                                            ImageConstants.baseIc,
-                                            height: 70,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return AboutNikeShoePage(index);
-                                          },
-                                        ));
-                                      },
-                                      child: AnimatedBuilder(
-                                        animation: shoeController,
-                                        builder: (context, child) {
-                                          return Transform.rotate(
-                                            angle: 12.4,
-                                            child: child,
-                                          );
-                                        },
-                                        child: Image.asset(
-                                          NikenewShoe[index].imgAdd!,
-                                          height: 90,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                //-----------------Stack--------------//
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 30),
-                        ],
-                      );
-                    },
-                    //------------------ListView----------------------//
-                  ),
-                ),
-                const SizedBox(height: 40),
-                //------------------Popular Shoe-------------------//
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Popular shoes',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'See more',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                              color: Colors.amber),
-                        ),
-                        Icon(
-                          Icons.arrow_right,
-                          size: 28,
-                          color: Colors.amber,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                New_Shoe_ListView(shoeController: shoeController),
                 //-------------- Popular ListView-------------------//
-                SizedBox(
-                  height: 230,
-                  width: 380,
-                  child: ListView.builder(
-                    itemCount: NikepopularShoe.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Container(
-                            height: 200,
-                            width: 380,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Stack(
-                                  alignment: Alignment.centerRight,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              //------Shoe Name-------//
-                                              const Text(
-                                                'Nike',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                NikepopularShoe[index].name!,
-                                                style: const TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.amber),
-                                              ),
-                                              const SizedBox(height: 20),
-                                              //---Popular shoe btn---//
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color(
-                                                            0xfff6d365)),
-                                                onPressed: () {},
-                                                child: const Row(
-                                                  children: [
-                                                    Text(
-                                                      'Add to bag',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .shopping_bag_outlined,
-                                                      size: 18,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        //----Base Nike icon---//
-                                        Container(
-                                          alignment: Alignment.centerRight,
-                                          child: Image.asset(
-                                            ImageConstants.baseIc,
-                                            height: 70,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    //---Popular Soe Img-----//
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return AboutNikeShoePage(
-                                              index,
-                                              isPopular: true,
-                                            );
-                                          },
-                                        ));
-                                      },
-                                      child: AnimatedBuilder(
-                                        animation: shoeController,
-                                        builder: (context, child) {
-                                          return Transform.rotate(
-                                            angle: 12.4,
-                                            child: child,
-                                          );
-                                        },
-                                        child: Image.asset(
-                                          NikepopularShoe[index].imgAdd!,
-                                          height: 90,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 30),
-                        ],
-                      );
-                    },
-                  ),
-                ),
+                Popular_Shoe_ListView(shoeController: shoeController),
               ],
             ),
           ),

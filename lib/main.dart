@@ -12,7 +12,7 @@ import 'screens/splash_screen.dart';
 void main() {
   runApp(BlocProvider(
     create: (context) => FavouriteCubitCubit(),
-    child:const MyApp(),
+    child: const MyApp(),
   ));
 }
 
