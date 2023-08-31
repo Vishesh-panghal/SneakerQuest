@@ -41,7 +41,7 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
         decoration: BoxDecoration(color: Colors.grey.shade100),
         child: Column(
           children: [
-            const SizedBox(height: 90),
+            const SizedBox(height: 91),
             //---------------- Menu & Profile-----------------------//
             Column(
               children: [
