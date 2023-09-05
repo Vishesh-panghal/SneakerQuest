@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE0E5EC), // Background color
+      backgroundColor: const Color(0xFFE0E5EC), // Background color
       body: Center(
         child: Container(
           width: 600,
           height: 400,
           decoration: BoxDecoration(
-            color: Color(0xFFD1D9E6), // Container color
+            color: const Color(0xFFD1D9E6), // Container color
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [
               BoxShadow(

@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_final_fields
-
 import 'package:SneakerQuest/cubit/fav_state.dart';
 import 'package:SneakerQuest/cubit/favourite_cubit.dart';
+import 'package:SneakerQuest/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -23,7 +22,19 @@ class _ShoeBagPageState extends State<ShoeBagPage>
   late AnimationController buyBtnController;
   @override
   void initState() {
-    buyBtnController = AnimationController(vsync: this);
+    buyBtnController = AnimationController(vsync: this)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            isShipped = false;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NikeHomePage(),
+                ));
+          });
+        }
+      });
     super.initState();
   }
 
@@ -35,7 +46,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
           Container(
             decoration: BoxDecoration(
               color: Colors.amber.shade400,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
@@ -46,10 +57,10 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //----------------Cart------------------//
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    margin: EdgeInsets.only(left: 15),
-                    child: Text(
+                    margin: const EdgeInsets.only(left: 15),
+                    child: const Text(
                       'Cart',
                       style: TextStyle(
                         fontFamily: 'Poppins',
@@ -59,7 +70,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                     ),
                   ),
                   //---------------Quote-------------------------//
-                  Text(
+                  const Text(
                     'Feel the Air. . .',
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -71,18 +82,22 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                       // letterSpacing: 1,
                     ),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   Container(
                     height: 400,
                     decoration: BoxDecoration(
                       color: Colors.amber.shade400,
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                    ),
                     child: BlocBuilder<FavouriteCubitCubit, FavDB>(
                       builder: (context, state) {
-                        for(var item in state.fav){
+                        for (var item in state.fav) {
                           _subTotal += double.parse(item.price!);
                         }
+                        _tax = _subTotal * 4 / 100;
+                        _total = _subTotal + _tax;
                         return ListView.builder(
                           itemCount: state.fav.length,
                           itemBuilder: (context, index) {
@@ -97,12 +112,12 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                                       height: 70,
                                       width: 180,
                                     ),
-                                    SizedBox(width: 75),
+                                    const SizedBox(width: 75),
                                     Column(
                                       children: [
                                         Text(
                                           '${state.fav[index].name}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: 'Poppins',
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -110,7 +125,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                                         ),
                                         Text(
                                           '${state.fav[index].style}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: 'Poppins',
                                             fontSize: 12,
                                           ),
@@ -121,14 +136,14 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                                           children: [
                                             Text(
                                               '  \u{20B9}${state.fav[index].price}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontFamily: 'Poppins',
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(width: 20),
-                                            Icon(
+                                            const SizedBox(width: 20),
+                                            const Icon(
                                               Icons.delete,
                                               color: Colors.red,
                                             ),
@@ -138,7 +153,8 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                                     )
                                   ],
                                 ),
-                                Divider(thickness: 2),
+                                const Divider(thickness: 2),
+                              const  SizedBox(height: 5),
                               ],
                             );
                           },
@@ -146,7 +162,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                       },
                     ),
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Text(
                         'Apply Coupon: ',
@@ -159,7 +175,9 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                       SizedBox(height: 5),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 4.0,
+                          ),
                           child: TextField(
                             decoration: InputDecoration(
                               fillColor: Colors.white,
@@ -170,81 +188,97 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                     ],
                   ),
 
-                  SizedBox(height: 25),
-                  Divider(thickness: 1.2),
+                  const SizedBox(height: 25),
+                  const Divider(thickness: 1.2),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(12),
                         bottomRight: Radius.circular(12),
                       ),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 38.0,
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: BlocBuilder<FavouriteCubitCubit, FavDB>(
+                      builder: (context, state) {
+                        return Column(
                           children: [
-                            Text(
-                              'SubTotal:',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'SubTotal:',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '$_subTotal',
+                                  style: const TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                            Text(
-                              '$_subTotal',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                            const SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'other:',
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '{Estimated Delivery, Handling & Tax}',
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '$_tax',
+                                  style: const TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
+                            const SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Total:',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  ' $_total',
+                                  style: const TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
                           ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Tax:',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '$_tax',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total:',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              ' $_total',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                      ],
+                        );
+                      },
                     ),
                   ),
                   // SizedBox(height: 70),
@@ -260,22 +294,20 @@ class _ShoeBagPageState extends State<ShoeBagPage>
             ),
             child: isShipped
                 ? LottieBuilder.asset(
-                    'assets/lottie/ic_shipp.json',
+                    'assets/lottie/ic_packing.json',
                     onLoaded: (p0) {
-                      print('Lottie');
                       buyBtnController.duration = p0.duration;
                       buyBtnController.forward();
-                      isShipped = !isShipped;
-                      setState(() {});
-                    },height: 60,
+                    },
+                    height: 60,
+                    repeat: false,
                   )
                 : TextButton(
                     onPressed: () {
                       isShipped = !isShipped;
-                      print(isShipped);
                       setState(() {});
                     },
-                    child: Text(
+                    child: const Text(
                       'Continue',
                       style: TextStyle(
                           fontFamily: 'Poppins',

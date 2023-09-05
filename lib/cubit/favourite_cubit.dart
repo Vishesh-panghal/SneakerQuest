@@ -21,7 +21,7 @@ class FavouriteCubitCubit extends Cubit<FavDB> {
 
   void removeFromFav({required ShoeItem shoe}) {
     List<ShoeItem> currList = List.from(state.fav);
-    currList.remove(shoe); // Remove the specified shoe from the list
+    currList.removeWhere((element) => element.name == shoe.name); // Remove the specified shoe from the list
     emit(FavDB(fav: currList)); // Emit the updated state
   }
 }
