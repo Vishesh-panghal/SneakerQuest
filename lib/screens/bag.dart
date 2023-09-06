@@ -154,7 +154,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                                   ],
                                 ),
                                 const Divider(thickness: 2),
-                              const  SizedBox(height: 5),
+                                const SizedBox(height: 5),
                               ],
                             );
                           },
@@ -302,19 +302,23 @@ class _ShoeBagPageState extends State<ShoeBagPage>
                     height: 60,
                     repeat: false,
                   )
-                : TextButton(
-                    onPressed: () {
-                      isShipped = !isShipped;
-                      setState(() {});
+                : BlocBuilder<FavouriteCubitCubit, FavDB>(
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: () {
+                          isShipped = !isShipped;
+                          setState(() {});
+                        },
+                        child: const Text(
+                          'Continue',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      );
                     },
-                    child: const Text(
-                      'Continue',
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
                   ),
           ),
         ],
