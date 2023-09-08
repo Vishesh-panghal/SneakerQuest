@@ -16,6 +16,8 @@ class AppDatabase {
 // Database variable
   Database? _database;
   static const USER_TABLE = 'usr';
+  static const FIRST_NAME = 'first_name';
+  static const LAST_NAME = 'last_name';
   static const USER_COLUMN_EMAIL = 'email';
   static const USER_COLUMN_PHONE = 'phone';
   static const USER_COLUMN_PASSWORD = 'password';
@@ -44,7 +46,7 @@ class AppDatabase {
       onCreate: (db, version) {
         // Here we assign table name and their Columns...(All SQL queries)..
         db.execute(
-            "Create table $USER_TABLE ($USER_COLUMN_EMAIL text primary key, $USER_COLUMN_PHONE text ,$USER_COLUMN_PASSWORD text )");
+            "Create table $USER_TABLE ($USER_COLUMN_EMAIL text primary key,$FIRST_NAME text,$LAST_NAME text, $USER_COLUMN_PHONE text ,$USER_COLUMN_PASSWORD text )");
       },
     );
   }

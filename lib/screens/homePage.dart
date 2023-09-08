@@ -1,11 +1,12 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, must_be_immutable
 
 import 'package:flutter/material.dart';
 import '../Data/text_content.dart';
 import 'homepage_screens/nike_shoe_page.dart';
 
 class NikeHomePage extends StatefulWidget {
-  const NikeHomePage({super.key});
+  String? name = '';
+  NikeHomePage({super.key, this.name});
 
   @override
   State<NikeHomePage> createState() => _NikeHomePageState();
@@ -46,18 +47,17 @@ class _NikeHomePageState extends State<NikeHomePage>
                     const Text(
                       'Welcome',
                       style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                      ),
+                          fontFamily: "Poppins",
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      'User',
+                      widget.name ?? 'User',
                       style: TextStyle(
                         fontFamily: "Poppins",
-                        fontSize: 28,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.amber.shade400,
                       ),

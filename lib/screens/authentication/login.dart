@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return NikeHomePage();
+                                    return NikeHomePage(name: mailController.text.toString(),);
                                   },
                                 ),
                               );

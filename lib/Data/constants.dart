@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 class ShoeItem {
+  late int? id;
   late String? name;
   late String? imgAdd;
   late String? aboutShoe;
@@ -10,17 +11,19 @@ class ShoeItem {
   late String? price;
 
   ShoeItem({
-    required this.name,
-    required this.imgAdd,
-    required this.aboutShoe,
-    required this.colorSelection,
-    required this.style,
+    required this.id,
+     this.name,
+     this.imgAdd,
+     this.aboutShoe,
+     this.colorSelection,
+     this.style,
     this.isPopular = false,
-    required this.price,
+     this.price,
   });
 }
 
 ShoeItem sh1 = ShoeItem(
+    id: 1,
     name: 'Alphafly 2',
     imgAdd: 'assets/Images/nike_store/Newest/list1.png',
     aboutShoe:
@@ -29,6 +32,7 @@ ShoeItem sh1 = ShoeItem(
     style: 'DN3555-600',
     price: '22795');
 ShoeItem sh2 = ShoeItem(
+    id: 2,
     name: 'Airmax Alpha',
     imgAdd: 'assets/Images/nike_store/Newest/list2.png',
     aboutShoe:
@@ -37,6 +41,7 @@ ShoeItem sh2 = ShoeItem(
     style: 'DM0829-001',
     price: '7495');
 ShoeItem sh3 = ShoeItem(
+    id: 3,
     name: 'Freak 4',
     imgAdd: 'assets/Images/nike_store/Newest/list3.png',
     aboutShoe:
@@ -45,6 +50,7 @@ ShoeItem sh3 = ShoeItem(
     style: 'DJ6149-500',
     price: '11295');
 ShoeItem sh4 = ShoeItem(
+    id: 4,
     name: 'Cosmic Unity 2',
     imgAdd: 'assets/Images/nike_store/Newest/lis4.png',
     aboutShoe:
@@ -53,6 +59,7 @@ ShoeItem sh4 = ShoeItem(
     style: 'White/Midnight Navy/Yellow',
     price: '13297');
 ShoeItem sh5 = ShoeItem(
+    id: 5,
     name: 'Precision 6',
     imgAdd: 'assets/Images/nike_store/Newest/list5.png',
     aboutShoe:
@@ -61,6 +68,7 @@ ShoeItem sh5 = ShoeItem(
     style: 'CD7069-004',
     price: '5696');
 ShoeItem sh6 = ShoeItem(
+    id: 6,
     name: 'Go FlyEase',
     imgAdd: 'assets/Images/nike_store/popular/list1.png',
     aboutShoe:
@@ -70,6 +78,7 @@ ShoeItem sh6 = ShoeItem(
     isPopular: true,
     price: '11895');
 ShoeItem sh7 = ShoeItem(
+    id: 7,
     name: 'Nike Air \nForce 1',
     imgAdd: 'assets/Images/nike_store/popular/list2.png',
     aboutShoe:
@@ -79,6 +88,7 @@ ShoeItem sh7 = ShoeItem(
     isPopular: true,
     price: '12895');
 ShoeItem sh8 = ShoeItem(
+    id: 8,
     name: 'Air Jordan \n13 Retro',
     imgAdd: 'assets/Images/nike_store/popular/list3.png',
     aboutShoe:
@@ -88,6 +98,7 @@ ShoeItem sh8 = ShoeItem(
     isPopular: true,
     price: '16995');
 ShoeItem sh9 = ShoeItem(
+    id: 9,
     name: 'SuperRep \nCycle 2',
     imgAdd: 'assets/Images/nike_store/popular/list4.png',
     aboutShoe:
@@ -97,6 +108,7 @@ ShoeItem sh9 = ShoeItem(
     isPopular: true,
     price: '9777');
 ShoeItem sh10 = ShoeItem(
+    id: 10,
     name: 'Luka 1 PF',
     imgAdd: 'assets/Images/nike_store/popular/list5.png',
     aboutShoe:
@@ -111,3 +123,5 @@ List<ShoeItem> shoes = [sh1, sh2, sh3, sh4, sh5, sh6, sh7, sh8, sh9, sh10];
 List<ShoeItem> NikepopularShoe = [sh6, sh7, sh8, sh9, sh10];
 
 List<ShoeItem> NikenewShoe = [sh1, sh2, sh3, sh4, sh5];
+
+  List shoeSize = ['36', '37', '38', '39', '40', '41', '42'];

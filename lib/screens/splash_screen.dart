@@ -174,7 +174,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                     } else {
                       Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) {
-                          return const NikeHomePage();
+                          return  NikeHomePage();
                         },
                       ));
                     }

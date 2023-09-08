@@ -29,7 +29,6 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
     super.initState();
   }
 
-  List shoeSize = ['36', '37', '38', '39', '40', '41', '42'];
   String isSelectedSize = '';
   bool isFav1 = false;
 
@@ -157,12 +156,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                 width: 30,
                                 decoration: BoxDecoration(
                                   color: isSelectedSize == shoeSize[index]
-                                      ? Colors.black54
+                                      ? Colors.black
                                       : Colors.grey.shade300,
-                                  border: isSelectedSize == shoeSize[index]
-                                      ? Border.all(
-                                          width: 2, color: Colors.brown)
-                                      : null,
                                   borderRadius: const BorderRadius.horizontal(
                                       left: Radius.circular(12),
                                       right: Radius.circular(8)),
@@ -250,19 +245,22 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                       const Text('Want to go to bag?'),
                                       const SizedBox(height: 5),
                                       ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ShoeBagPage(),
-                                                ));
-                                          },
-                                          child: const Text(
-                                            'Bag',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins'),
-                                          ))
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ShoeBagPage(
+                                                  shoeSize: isSelectedSize,
+                                                ),
+                                              ));
+                                        },
+                                        child: const Text(
+                                          'Bag',
+                                          style:
+                                              TextStyle(fontFamily: 'Poppins'),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -278,14 +276,14 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                           ),
                           BlocBuilder<FavouriteCubitCubit, FavDB>(
                             builder: (context, state) {
-                              var name = widget.isPopular
-                                  ? NikepopularShoe[widget.index].name!
-                                  : NikenewShoe[widget.index].name!;
+                              var id = widget.isPopular
+                                  ? NikepopularShoe[widget.index].id!
+                                  : NikenewShoe[widget.index].id!;
                               Color clr = Colors.white;
                               var isFav = false;
-                              
+
                               for (ShoeItem item in state.fav) {
-                                if (item.name == name) {
+                                if (item.id == id) {
                                   clr = Colors.red;
                                   isFav = true;
                                 }
@@ -294,7 +292,6 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: clr),
                                 onPressed: () {
-                                 
                                   if (!isFav) {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
@@ -312,39 +309,23 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                     context
                                         .read<FavouriteCubitCubit>()
                                         .addToFav(
-                                          shoe: ShoeItem(
-                                            name: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .name!
-                                                : NikenewShoe[widget.index]
-                                                    .name!,
-                                            imgAdd: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .imgAdd!
-                                                : NikenewShoe[widget.index]
-                                                    .imgAdd!,
-                                            aboutShoe: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .aboutShoe!
-                                                : NikenewShoe[widget.index]
-                                                    .aboutShoe!,
-                                            colorSelection: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .colorSelection!
-                                                : NikenewShoe[widget.index]
-                                                    .colorSelection!,
-                                            style: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .style!
-                                                : NikenewShoe[widget.index]
-                                                    .style!,
-                                            price: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .price!
-                                                : NikenewShoe[widget.index]
-                                                    .price!,
-                                          ),
-                                        );
+                                            shoe: ShoeItem(
+                                          id: id,
+                                          name: widget.isPopular
+                                              ? NikepopularShoe[widget.index]
+                                                  .name!
+                                              : NikenewShoe[widget.index].name!,
+                                          price: widget.isPopular
+                                              ? NikepopularShoe[widget.index]
+                                                  .price!
+                                              : NikenewShoe[widget.index]
+                                                  .price!,
+                                          imgAdd: widget.isPopular
+                                              ? NikepopularShoe[widget.index]
+                                                  .imgAdd!
+                                              : NikenewShoe[widget.index]
+                                                  .imgAdd!,
+                                        ));
                                     setState(() {});
                                   } else {
                                     ScaffoldMessenger.of(context)
@@ -362,42 +343,8 @@ class _AboutNikeShoePageState extends State<AboutNikeShoePage>
                                     ));
                                     context
                                         .read<FavouriteCubitCubit>()
-                                        .removeFromFav(
-                                          shoe: ShoeItem(
-                                            name: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .name!
-                                                : NikenewShoe[widget.index]
-                                                    .name!,
-                                            imgAdd: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .imgAdd!
-                                                : NikenewShoe[widget.index]
-                                                    .imgAdd!,
-                                            aboutShoe: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .aboutShoe!
-                                                : NikenewShoe[widget.index]
-                                                    .aboutShoe!,
-                                            colorSelection: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .colorSelection!
-                                                : NikenewShoe[widget.index]
-                                                    .colorSelection!,
-                                            style: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .style!
-                                                : NikenewShoe[widget.index]
-                                                    .style!,
-                                            price: widget.isPopular
-                                                ? NikepopularShoe[widget.index]
-                                                    .price!
-                                                : NikenewShoe[widget.index]
-                                                    .price!,
-                                          ),
-                                        );
+                                        .removeFromFav(shoe: ShoeItem(id: id));
                                   }
-                                  
                                 },
                                 child: const Text(
                                   'Favourite',

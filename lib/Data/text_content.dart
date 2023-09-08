@@ -6,4 +6,6 @@ class ImageConstants {
   static const String adiIc =
       'https://cdn-icons-png.flaticon.com/512/731/731962.png';
   static const String baseIc = 'assets/Images/more_images/base_icon.png';
+  static const String googleIc =
+      'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png';
 }

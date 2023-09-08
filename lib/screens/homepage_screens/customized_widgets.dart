@@ -122,11 +122,11 @@ class _HomepageShoeCardState extends State<HomepageShoeCard>
                             backgroundColor: const Color(0xfff6d365),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ShoeBagPage(),
-                                ));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) =>  ShoeBagPage(),
+                            //     ));
                           },
                           child: const Row(
                             children: [
