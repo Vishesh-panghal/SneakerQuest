@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, dead_code
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:SneakerQuest/screens/authentication/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +27,13 @@ class _LoginPageState extends State<LoginPage> {
             height: size.height * .7,
             decoration: BoxDecoration(
                 color: Colors.amber,
-                borderRadius: BorderRadius.only(
+                borderRadius:const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(10, 11),
+                    offset:const Offset(10, 11),
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 50,
                   )
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: size.height * .05),
-                      Text(
+                    const Text(
                         'Sneaker Quest',
                         style: TextStyle(
                           fontFamily: "Poppins",
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: size.height * .07),
                       Text(
                         'Login'.toUpperCase(),
-                        style: TextStyle(
+                        style:const TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 32,
                           color: Colors.white,
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                           horizontal: size.height * .02,
                         ),
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(139, 248, 248, 248),
+                            color:const Color.fromARGB(139, 248, 248, 248),
                             borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration:const InputDecoration(
                                   label: Text(
                                     'Email',
                                     style: TextStyle(
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label:const Text(
                                     'Password',
                                     style: TextStyle(
                                       fontFamily: "Poppins",
@@ -131,11 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                                       setState(() {});
                                     },
                                     icon: isVisiblity
-                                        ? Icon(
+                                        ?const Icon(
                                             Icons.visibility_off,
                                             color: Colors.grey,
                                           )
-                                        : Icon(
+                                        :const Icon(
                                             Icons.visibility,
                                             color: Colors.blue,
                                           ),
@@ -173,14 +173,14 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {}
                                   },
-                                  child: Text(
+                                  child:const Text(
                                     'Login',
                                     style: TextStyle(fontFamily: 'Poppins'),
                                   ),
                                 ),
                               ),
                               SizedBox(height: size.height * .03),
-                              Text(
+                            const  Text(
                                 "Don't have an account?",
                                 style: TextStyle(
                                   fontFamily: "Poppins",
@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => SignupPage(),
+                                        builder: (context) =>const SignupPage(),
                                       ));
                                 },
                                 child: Text(
@@ -212,12 +212,12 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(width: size.height * .03),
-                          Icon(
+                         const Icon(
                             Icons.apple,
                             size: 50,
                           ),
                           SizedBox(width: size.width * .02),
-                          Icon(
+                        const  Icon(
                             Icons.facebook,
                             size: 50,
                             color: Colors.blue,
@@ -255,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: size.height * .01),
-                Text(
+               const Text(
                   'Forgot Password',
                   style: TextStyle(
                     fontFamily: 'Poppins',
@@ -264,9 +264,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.black,
                   ),
                 ),
-                Divider(thickness: 2),
+              const  Divider(thickness: 2),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration:const InputDecoration(
                     label: Text(
                       'Email',
                       style: TextStyle(
@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: size.height * .03),
                 ElevatedButton(
                     onPressed: () {},
-                    child: Text(
+                    child:const Text(
                       'Sent OTP',
                       style: TextStyle(
                         fontFamily: "Poppins",

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks
+
 
 
 import 'package:flutter/material.dart';
@@ -31,13 +31,13 @@ class _SignupPageState extends State<SignupPage> {
             height: size.height * .7,
             decoration: BoxDecoration(
                 color: Colors.amber,
-                borderRadius: BorderRadius.only(
+                borderRadius:const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(10, 11),
+                    offset:const Offset(10, 11),
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 50,
                   )
@@ -51,7 +51,7 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: size.height * .05),
-                      Text(
+                    const  Text(
                         'Sneaker Quest',
                         style: TextStyle(
                           fontFamily: "Poppins",
@@ -65,7 +65,7 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(height: size.height * .05),
                       Text(
                         'Signup'.toUpperCase(),
-                        style: TextStyle(
+                        style:const TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 32,
                           color: Colors.white,
@@ -82,7 +82,7 @@ class _SignupPageState extends State<SignupPage> {
                           horizontal: size.height * .02,
                         ),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(139, 248, 248, 248),
+                          color:const Color.fromARGB(139, 248, 248, 248),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
@@ -104,7 +104,7 @@ class _SignupPageState extends State<SignupPage> {
                                       }
                                       return null;
                                     },
-                                    decoration: InputDecoration(
+                                    decoration:const InputDecoration(
                                         label: Text(
                                       'First name',
                                       style: TextStyle(
@@ -123,7 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                                       }
                                       return null;
                                     },
-                                    decoration: InputDecoration(
+                                    decoration:const InputDecoration(
                                         label: Text(
                                       'Last name',
                                       style: TextStyle(
@@ -143,7 +143,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration:const InputDecoration(
                                   label: Text(
                                     'Email',
                                     style: TextStyle(
@@ -162,7 +162,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration:const InputDecoration(
                                   label: Text(
                                     'Phone',
                                     style: TextStyle(
@@ -186,7 +186,7 @@ class _SignupPageState extends State<SignupPage> {
                                         }
                                         return null;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration:const InputDecoration(
                                         label: Text(
                                           'Password',
                                           style: TextStyle(
@@ -212,7 +212,7 @@ class _SignupPageState extends State<SignupPage> {
                                         }
                                         return null;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration:const InputDecoration(
                                         label: Text(
                                           'Confirm Password',
                                           style: TextStyle(
@@ -239,7 +239,7 @@ class _SignupPageState extends State<SignupPage> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => LoginPage(),
+                                            builder: (context) => const LoginPage(),
                                           ));
                                       firstNameController.clear();
                                       lastNameController.clear();
@@ -249,7 +249,7 @@ class _SignupPageState extends State<SignupPage> {
                                       confirmPassController.clear();
                                     }
                                   },
-                                  child: Text(
+                                  child:const Text(
                                     'Register',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
@@ -258,7 +258,7 @@ class _SignupPageState extends State<SignupPage> {
                                 ),
                               ),
                               SizedBox(height: size.height * .03),
-                              Text(
+                             const Text(
                                 "Already have an account?",
                                 style: TextStyle(
                                   fontFamily: "Poppins",
@@ -269,7 +269,7 @@ class _SignupPageState extends State<SignupPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LoginPage(),
+                                        builder: (context) => const LoginPage(),
                                       ));
                                 },
                                 child: Text(

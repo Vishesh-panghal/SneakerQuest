@@ -1,11 +1,11 @@
 // ignore_for_file: unused_import
 
+import 'package:SneakerQuest/screens/authentication/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SneakerQuest/cubit/favourite_cubit.dart';
 import 'package:SneakerQuest/screens/about_page.dart';
 import 'package:SneakerQuest/screens/bag.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'screens/authentication/login.dart';
 import 'screens/homePage.dart';
 import 'screens/splash_screen.dart';
 
@@ -23,8 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+      ),
       debugShowCheckedModeBanner: false,
-      home: NikeHomePage(),
+      home: const SignupPage(),
     );
   }
 }

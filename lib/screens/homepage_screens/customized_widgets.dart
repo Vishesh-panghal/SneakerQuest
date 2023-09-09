@@ -1,4 +1,3 @@
-import 'package:SneakerQuest/screens/bag.dart';
 import 'package:flutter/material.dart';
 
 import '../../Data/text_content.dart';

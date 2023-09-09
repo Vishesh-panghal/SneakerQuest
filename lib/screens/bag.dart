@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, must_be_immutable
 
 import 'package:SneakerQuest/Data/text_content.dart';
 import 'package:SneakerQuest/cubit/fav_state.dart';
@@ -25,14 +25,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
   late AnimationController buyBtnController;
   @override
   void initState() {
-    buyBtnController = AnimationController(vsync: this)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            isShipped = false;
-          });
-        }
-      });
+    buyBtnController = AnimationController(vsync: this);
     super.initState();
   }
 
@@ -134,36 +127,52 @@ class _ShoeBagPageState extends State<ShoeBagPage>
             ),
           ),
           //------------------Continue button----------------------//
-          Container(
-            height: 80,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-            ),
-            child: isShipped
-                ? LottieBuilder.asset(
-                    'assets/lottie/ic_packing.json',
-                    onLoaded: (p0) {
-                      buyBtnController.duration = p0.duration;
-                      buyBtnController.forward();
-                    },
-                    height: 60,
-                    repeat: false,
-                  )
-                : TextButton(
-                    onPressed: () {
-                      isShipped = !isShipped;
-                      setState(() {});
-                    },
-                    child: const Text(
-                      'Continue',
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  ),
+          StatefulBuilder(
+            builder: (context, setState) {
+              return Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                ),
+                child: isShipped
+                    ? LottieBuilder.asset(
+                        'assets/lottie/ic_packing.json',
+                        onLoaded: (p0) {
+                          buyBtnController.duration = p0.duration;
+                          buyBtnController.forward();
+                          buyBtnController.addStatusListener((status) {
+                            if (status == AnimationStatus.completed) {
+                              setState(() {
+                                isShipped = false;
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => NikeHomePage(),
+                                //     ));
+                              });
+                            }
+                          });
+                        },
+                        height: 60,
+                        repeat: false,
+                      )
+                    : TextButton(
+                        onPressed: () {
+                          isShipped = !isShipped;
+                          setState(() {});
+                        },
+                        child: const Text(
+                          'Continue',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ),
+              );
+            },
           ),
         ],
       ),
@@ -267,7 +276,7 @@ class _ShoeBagPageState extends State<ShoeBagPage>
         return ListView.builder(
           itemCount: state.fav.length,
           itemBuilder: (context, index) {
-            var shoeItem = state.fav[index]; // Get the ShoeItem from the list
+            var shoeItem = state.fav[index];
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
