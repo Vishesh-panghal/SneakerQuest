@@ -3,8 +3,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import 'authentication/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'authentication/login_page.dart';
 import 'homePage.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -31,6 +31,8 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 
   //--------------Animation Controllers----------------------//
   void initState() {
+
+    checkLoginStatus();
     iconController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
     shoeController =
@@ -46,6 +48,12 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       setState(() {});
     });
     super.initState();
+  }
+
+   Future<void> checkLoginStatus() async
+  {
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    isLoggedIn = pref.getBool(SplashScreenPage.KEYLOGIN)?? false;
   }
 
   @override
@@ -168,7 +176,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                     if (!isLoggedIn) {
                       Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) {
-                          return LoginPage();
+                          return const LoginPage();
                         },
                       ));
                     } else {

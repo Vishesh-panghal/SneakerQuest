@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
 
-
+import 'package:SneakerQuest/Data/app_database.dart';
+import 'package:SneakerQuest/Data/app_login_model.dart';
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
@@ -15,6 +18,14 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   bool isVisiblity = true;
   final _formKey = GlobalKey<FormState>();
+  late AppDatabase myDB;
+
+  @override
+  void initState() {
+    myDB = AppDatabase.db;
+    super.initState();
+  }
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
@@ -31,13 +42,13 @@ class _SignupPageState extends State<SignupPage> {
             height: size.height * .7,
             decoration: BoxDecoration(
                 color: Colors.amber,
-                borderRadius:const BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    offset:const Offset(10, 11),
+                    offset: const Offset(10, 11),
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 50,
                   )
@@ -51,7 +62,7 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: size.height * .05),
-                    const  Text(
+                      const Text(
                         'Sneaker Quest',
                         style: TextStyle(
                           fontFamily: "Poppins",
@@ -65,7 +76,7 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(height: size.height * .05),
                       Text(
                         'Signup'.toUpperCase(),
-                        style:const TextStyle(
+                        style: const TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 32,
                           color: Colors.white,
@@ -75,14 +86,14 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                       SizedBox(height: size.height * .03),
-                      //-------------Login container----------------------//
+                      //-------------Login container-------------------//
                       Container(
                         height: size.height * .8,
                         margin: EdgeInsets.symmetric(
                           horizontal: size.height * .02,
                         ),
                         decoration: BoxDecoration(
-                          color:const Color.fromARGB(139, 248, 248, 248),
+                          color: const Color.fromARGB(139, 248, 248, 248),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
@@ -104,7 +115,7 @@ class _SignupPageState extends State<SignupPage> {
                                       }
                                       return null;
                                     },
-                                    decoration:const InputDecoration(
+                                    decoration: const InputDecoration(
                                         label: Text(
                                       'First name',
                                       style: TextStyle(
@@ -123,7 +134,7 @@ class _SignupPageState extends State<SignupPage> {
                                       }
                                       return null;
                                     },
-                                    decoration:const InputDecoration(
+                                    decoration: const InputDecoration(
                                         label: Text(
                                       'Last name',
                                       style: TextStyle(
@@ -143,7 +154,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration:const InputDecoration(
+                                decoration: const InputDecoration(
                                   label: Text(
                                     'Email',
                                     style: TextStyle(
@@ -162,7 +173,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration:const InputDecoration(
+                                decoration: const InputDecoration(
                                   label: Text(
                                     'Phone',
                                     style: TextStyle(
@@ -186,7 +197,7 @@ class _SignupPageState extends State<SignupPage> {
                                         }
                                         return null;
                                       },
-                                      decoration:const InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           'Password',
                                           style: TextStyle(
@@ -212,7 +223,7 @@ class _SignupPageState extends State<SignupPage> {
                                         }
                                         return null;
                                       },
-                                      decoration:const InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           'Confirm Password',
                                           style: TextStyle(
@@ -234,22 +245,56 @@ class _SignupPageState extends State<SignupPage> {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const LoginPage(),
-                                          ));
-                                      firstNameController.clear();
-                                      lastNameController.clear();
-                                      emailController.clear();
-                                      phnController.clear();
-                                      passController.clear();
-                                      confirmPassController.clear();
+                                      if (await myDB.findUser(
+                                          emailController.text.toString())) {
+                                        var firstName =
+                                            firstNameController.text.toString();
+                                        var lastName =
+                                            lastNameController.text.toString();
+                                        var email =
+                                            emailController.text.toString();
+                                        var phone =
+                                            phnController.text.toString();
+                                        var password =
+                                            passController.text.toString();
+
+                                        myDB.addusr(UsrLoginModel(
+                                            first_name: firstName,
+                                            last_name: lastName,
+                                            email: email,
+                                            phone: phone,
+                                            password: password));
+
+                                        firstNameController.clear();
+                                        lastNameController.clear();
+                                        emailController.clear();
+                                        phnController.clear();
+                                        passController.clear();
+                                        confirmPassController.clear();
+
+                                        Timer(const Duration(seconds: 2), () {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const LoginPage(),
+                                              ));
+                                        });
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                'User found with ${emailController.text.toString()}'),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
                                     }
                                   },
-                                  child:const Text(
+                                  child: const Text(
                                     'Register',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
@@ -258,7 +303,7 @@ class _SignupPageState extends State<SignupPage> {
                                 ),
                               ),
                               SizedBox(height: size.height * .03),
-                             const Text(
+                              const Text(
                                 "Already have an account?",
                                 style: TextStyle(
                                   fontFamily: "Poppins",
@@ -279,6 +324,12 @@ class _SignupPageState extends State<SignupPage> {
                                     color: Colors.blue.shade600,
                                   ),
                                 ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  myDB.deleteQ();
+                                },
+                                child: const Text('Delete table'),
                               ),
                             ],
                           ),

@@ -6,7 +6,7 @@ import 'package:SneakerQuest/Data/text_content.dart';
 import 'package:SneakerQuest/screens/bag.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../Data/constants.dart';
+import '../Data/shoe_constants.dart';
 import '../cubit/fav_state.dart';
 
 class AboutNikeShoePage extends StatefulWidget {

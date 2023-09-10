@@ -1,7 +1,11 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
+import 'package:SneakerQuest/Data/app_database.dart';
 import 'package:SneakerQuest/screens/authentication/signup_page.dart';
+import 'package:SneakerQuest/screens/homePage.dart';
+import 'package:SneakerQuest/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Data/text_content.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,6 +21,19 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
+  late AppDatabase myDB;
+  var arrUsr = [];
+  @override
+  void initState() {
+    myDB = AppDatabase.db;
+    getUsr();
+    super.initState();
+  }
+
+  void getUsr() async {
+    arrUsr = await myDB.fetchUsr();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,13 +44,13 @@ class _LoginPageState extends State<LoginPage> {
             height: size.height * .7,
             decoration: BoxDecoration(
                 color: Colors.amber,
-                borderRadius:const BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    offset:const Offset(10, 11),
+                    offset: const Offset(10, 11),
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 50,
                   )
@@ -47,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: size.height * .05),
-                    const Text(
+                      const Text(
                         'Sneaker Quest',
                         style: TextStyle(
                           fontFamily: "Poppins",
@@ -61,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: size.height * .07),
                       Text(
                         'Login'.toUpperCase(),
-                        style:const TextStyle(
+                        style: const TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 32,
                           color: Colors.white,
@@ -78,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                           horizontal: size.height * .02,
                         ),
                         decoration: BoxDecoration(
-                            color:const Color.fromARGB(139, 248, 248, 248),
+                            color: const Color.fromARGB(139, 248, 248, 248),
                             borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -95,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                   return null;
                                 },
-                                decoration:const InputDecoration(
+                                decoration: const InputDecoration(
                                   label: Text(
                                     'Email',
                                     style: TextStyle(
@@ -118,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                  label:const Text(
+                                  label: const Text(
                                     'Password',
                                     style: TextStyle(
                                       fontFamily: "Poppins",
@@ -131,11 +148,11 @@ class _LoginPageState extends State<LoginPage> {
                                       setState(() {});
                                     },
                                     icon: isVisiblity
-                                        ?const Icon(
+                                        ? const Icon(
                                             Icons.visibility_off,
                                             color: Colors.grey,
                                           )
-                                        :const Icon(
+                                        : const Icon(
                                             Icons.visibility,
                                             color: Colors.blue,
                                           ),
@@ -170,17 +187,45 @@ class _LoginPageState extends State<LoginPage> {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {}
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      if (await myDB.loginUsr(
+                                          emailController.text.toString(),
+                                          passController.text.toString())) {
+                                        var firstName =
+                                            await myDB.findFirstNameByEmail(
+                                                emailController.text
+                                                    .toString());
+                                        final SharedPreferences
+                                            sharedPreferences =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        sharedPreferences.setString(
+                                            SplashScreenPage.KEYLOGIN,
+                                            firstName.toString());
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NikeHomePage(),
+                                            ));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content: Text("Error credintails"),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      }
+                                    }
                                   },
-                                  child:const Text(
+                                  child: const Text(
                                     'Login',
                                     style: TextStyle(fontFamily: 'Poppins'),
                                   ),
                                 ),
                               ),
                               SizedBox(height: size.height * .03),
-                            const  Text(
+                              const Text(
                                 "Don't have an account?",
                                 style: TextStyle(
                                   fontFamily: "Poppins",
@@ -191,7 +236,8 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>const SignupPage(),
+                                        builder: (context) =>
+                                            const SignupPage(),
                                       ));
                                 },
                                 child: Text(
@@ -212,12 +258,12 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(width: size.height * .03),
-                         const Icon(
+                          const Icon(
                             Icons.apple,
                             size: 50,
                           ),
                           SizedBox(width: size.width * .02),
-                        const  Icon(
+                          const Icon(
                             Icons.facebook,
                             size: 50,
                             color: Colors.blue,
@@ -255,7 +301,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: size.height * .01),
-               const Text(
+                const Text(
                   'Forgot Password',
                   style: TextStyle(
                     fontFamily: 'Poppins',
@@ -264,9 +310,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.black,
                   ),
                 ),
-              const  Divider(thickness: 2),
+                const Divider(thickness: 2),
                 TextFormField(
-                  decoration:const InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text(
                       'Email',
                       style: TextStyle(
@@ -279,7 +325,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: size.height * .03),
                 ElevatedButton(
                     onPressed: () {},
-                    child:const Text(
+                    child: const Text(
                       'Sent OTP',
                       style: TextStyle(
                         fontFamily: "Poppins",

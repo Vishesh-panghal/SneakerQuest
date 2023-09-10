@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:SneakerQuest/Data/app_model.dart';
+import 'package:SneakerQuest/Data/app_login_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -77,7 +77,7 @@ class AppDatabase {
     var count = await db.rawQuery(
         "SELECT * FROM $USER_TABLE WHERE $USER_COLUMN_EMAIL = ?", [email]);
     print("Count find user:-${count.isEmpty}");
-    return count.isNotEmpty;
+    return count.isEmpty;
   }
 
   Future<bool> loginUsr(String email, String pass) async {
@@ -85,8 +85,22 @@ class AppDatabase {
     var count = await db.rawQuery(
         "SELECT * FROM $USER_TABLE WHERE $USER_COLUMN_EMAIL = ? AND $USER_COLUMN_PASSWORD = ?",
         [email, pass]);
-    return count.isEmpty;
+    return count.isNotEmpty;
   }
+
+  Future<Object?> findFirstNameByEmail(String email) async {
+  var db = await getDB();
+  var result = await db.rawQuery(
+      "SELECT $FIRST_NAME FROM $USER_TABLE WHERE $USER_COLUMN_EMAIL = ?",
+      [email]);
+
+  if (result.isNotEmpty) {
+    return result.first[FIRST_NAME];
+  } else {
+    return null;
+  }
+}
+
 
   Future<void> deleteTable() async {
     var db = await getDB();

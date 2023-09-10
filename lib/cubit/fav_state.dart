@@ -1,4 +1,4 @@
-import 'package:SneakerQuest/Data/constants.dart';
+import 'package:SneakerQuest/Data/shoe_constants.dart';
 
 class FavDB {
   List<ShoeItem> fav = [];

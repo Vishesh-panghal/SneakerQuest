@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../Data/constants.dart';
+import '../../Data/shoe_constants.dart';
 import '../about_page.dart';
 import 'customized_widgets.dart';
 

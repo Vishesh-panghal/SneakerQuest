@@ -1,12 +1,14 @@
 // ignore_for_file: file_names, must_be_immutable
 
+import 'package:SneakerQuest/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Data/text_content.dart';
 import 'homepage_screens/nike_shoe_page.dart';
 
 class NikeHomePage extends StatefulWidget {
   String? name = '';
-  NikeHomePage({super.key, this.name});
+  NikeHomePage({super.key,});
 
   @override
   State<NikeHomePage> createState() => _NikeHomePageState();
@@ -19,9 +21,11 @@ class _NikeHomePageState extends State<NikeHomePage>
 
   @override
   //----------------------init State-----------------------//
-  void initState() {
+  void initState()async {
     shoeController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
+    var sharedPreference = await SharedPreferences.getInstance();
+    sharedPreference.getString(SplashScreenPage.KEYLOGIN);
     shoeController.forward();
     super.initState();
   }

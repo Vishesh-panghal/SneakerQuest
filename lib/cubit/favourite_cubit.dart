@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:SneakerQuest/cubit/fav_state.dart';
 
-import '../Data/constants.dart';
+import '../Data/shoe_constants.dart';
 
 class FavouriteCubitCubit extends Cubit<FavDB> {
   // initial state:-
