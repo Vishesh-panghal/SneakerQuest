@@ -21,11 +21,11 @@ class _NikeHomePageState extends State<NikeHomePage>
 
   @override
   //----------------------init State-----------------------//
-  void initState()async {
+  void initState() {
     shoeController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
-    var sharedPreference = await SharedPreferences.getInstance();
-    sharedPreference.getString(SplashScreenPage.KEYLOGIN);
+    // var sharedPreference = await SharedPreferences.getInstance();
+    // sharedPreference.getString(SplashScreenPage.KEYLOGIN);
     shoeController.forward();
     super.initState();
   }

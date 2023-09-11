@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:SneakerQuest/screens/authentication/login_page.dart';
 import 'package:SneakerQuest/screens/authentication/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SneakerQuest/cubit/favourite_cubit.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreenPage(),
+      home:  LoginPage(),
     );
   }
 }

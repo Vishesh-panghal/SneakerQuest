@@ -53,7 +53,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
    Future<void> checkLoginStatus() async
   {
     SharedPreferences pref =await SharedPreferences.getInstance();
-    isLoggedIn = pref.getBool(SplashScreenPage.KEYLOGIN)?? false;
+    isLoggedIn =  pref.getBool(SplashScreenPage.KEYLOGIN)?? false;
   }
 
   @override

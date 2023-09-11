@@ -196,13 +196,13 @@ class _LoginPageState extends State<LoginPage> {
                                             await myDB.findFirstNameByEmail(
                                                 emailController.text
                                                     .toString());
-                                        final SharedPreferences
-                                            sharedPreferences =
-                                            await SharedPreferences
-                                                .getInstance();
-                                        sharedPreferences.setString(
-                                            SplashScreenPage.KEYLOGIN,
-                                            firstName.toString());
+                                        // final SharedPreferences
+                                        //     sharedPreferences =
+                                        //     await SharedPreferences
+                                        //         .getInstance();
+                                        // sharedPreferences.setString(
+                                        //     SplashScreenPage.KEYLOGIN,
+                                        //     firstName.toString());
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
