@@ -31,7 +31,6 @@ class _SplashScreenPageState extends State<SplashScreenPage>
 
   //--------------Animation Controllers----------------------//
   void initState() {
-
     checkLoginStatus();
     iconController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
@@ -50,10 +49,9 @@ class _SplashScreenPageState extends State<SplashScreenPage>
     super.initState();
   }
 
-   Future<void> checkLoginStatus() async
-  {
-    SharedPreferences pref =await SharedPreferences.getInstance();
-    isLoggedIn =  pref.getBool(SplashScreenPage.KEYLOGIN)?? false;
+  Future<void> checkLoginStatus() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool(SplashScreenPage.KEYLOGIN, isLoggedIn);
   }
 
   @override
@@ -182,7 +180,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
                     } else {
                       Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) {
-                          return  NikeHomePage();
+                          return const NikeHomePage();
                         },
                       ));
                     }

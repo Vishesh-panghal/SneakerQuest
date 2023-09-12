@@ -190,25 +190,28 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       if (await myDB.loginUsr(
-                                          emailController.text.toString(),
-                                          passController.text.toString())) {
+                                        emailController.text.toString(),
+                                        passController.text.toString(),
+                                      )) {
                                         var firstName =
                                             await myDB.findFirstNameByEmail(
-                                                emailController.text
-                                                    .toString());
-                                        // final SharedPreferences
-                                        //     sharedPreferences =
-                                        //     await SharedPreferences
-                                        //         .getInstance();
-                                        // sharedPreferences.setString(
-                                        //     SplashScreenPage.KEYLOGIN,
-                                        //     firstName.toString());
+                                          emailController.text.toString(),
+                                        );
+                                        final SharedPreferences
+                                            sharedPreferences =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        await sharedPreferences.setString(
+                                            'firstName', firstName as String);
+                                        await sharedPreferences.setBool(
+                                            SplashScreenPage.KEYLOGIN, true);
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NikeHomePage(),
-                                            ));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const NikeHomePage(),
+                                          ),
+                                        );
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(

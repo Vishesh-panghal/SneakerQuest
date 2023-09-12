@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       debugShowCheckedModeBanner: false,
-      home:  LoginPage(),
+      home:const  SplashScreenPage(),
     );
   }
 }
