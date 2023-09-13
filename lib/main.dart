@@ -2,7 +2,6 @@
 
 import 'package:SneakerQuest/screens/authentication/login_page.dart';
 import 'package:SneakerQuest/screens/authentication/signup_page.dart';
-import 'package:SneakerQuest/screens/x.dart';
 import 'package:flutter/material.dart';
 import 'package:SneakerQuest/cubit/favourite_cubit.dart';
 import 'package:SneakerQuest/screens/about_page.dart';
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       debugShowCheckedModeBanner: false,
-      home:const  RoughPage(),
+      home:const  SplashScreenPage(),
     );
   }
 }
